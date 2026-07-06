@@ -145,3 +145,10 @@ bash ./scripts/prepare-st.sh /path/to/SillyTavern --include-data
 6. 账号锁；
 7. 管理后台。
 
+
+
+## 2026-07-06 修复
+
+修复 GitHub Actions / Gradle 编译失败：`compileDebugJavaWithJavac (1.8)` 与 `compileDebugKotlin (17)` 目标版本不一致。现在 Java 和 Kotlin 均统一为 JVM 17。
+
+同时移除了 AndroidManifest.xml 里的 `android:extractNativeLibs`，改由 `app/build.gradle` 的 `packaging.jniLibs.useLegacyPackaging = true` 管理，避免 AGP 新版本警告。

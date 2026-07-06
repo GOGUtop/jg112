@@ -64,3 +64,27 @@ app/src/main/assets/sillytavern/server.js
 app/src/main/jniLibs/x86_64/libnodebin.so
 ```
 
+
+
+## GitHub Actions: Inconsistent JVM-target compatibility
+
+如果出现：
+
+```text
+Inconsistent JVM-target compatibility detected for tasks compileDebugJavaWithJavac (1.8) and compileDebugKotlin (17)
+```
+
+说明 Java 编译目标还是 1.8，但 Kotlin 是 17。当前版本已在 `app/build.gradle` 里加入：
+
+```gradle
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+}
+
+kotlinOptions {
+    jvmTarget = '17'
+}
+```
+
+重新提交后再点 GitHub Actions 的 Build debug APK 即可。

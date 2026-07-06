@@ -6,7 +6,6 @@
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
-        android:extractNativeLibs="true"
         android:theme="@style/AppTheme"
         android:label="今日新卡 Local">
         <activity
