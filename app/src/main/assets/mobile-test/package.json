@@ -1,0 +1,6 @@
+{
+  "name": "stage1-mobile-test",
+  "version": "0.1.0",
+  "private": true,
+  "main": "server.js"
+}
