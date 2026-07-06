@@ -152,3 +152,29 @@ bash ./scripts/prepare-st.sh /path/to/SillyTavern --include-data
 修复 GitHub Actions / Gradle 编译失败：`compileDebugJavaWithJavac (1.8)` 与 `compileDebugKotlin (17)` 目标版本不一致。现在 Java 和 Kotlin 均统一为 JVM 17。
 
 同时移除了 AndroidManifest.xml 里的 `android:extractNativeLibs`，改由 `app/build.gradle` 的 `packaging.jniLibs.useLegacyPackaging = true` 管理，避免 AGP 新版本警告。
+
+
+## GitHub Actions 下载 APK
+
+Actions 编译成功后，在对应 run 页面最上方或最下方的 **Artifacts** 区域下载：
+
+```text
+SillyTavernLocalApp-stage1-debug-apk
+```
+
+如果 Artifacts 显示 `-`，说明 workflow 里没有上传 APK。当前模板已经加入：
+
+```yaml
+- name: Upload debug APK
+  uses: actions/upload-artifact@v4
+  with:
+    name: SillyTavernLocalApp-stage1-debug-apk
+    path: app/build/outputs/apk/debug/*.apk
+    if-no-files-found: error
+```
+
+下载后解压 artifact，里面的 APK 通常是：
+
+```text
+app-debug.apk
+```
